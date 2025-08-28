@@ -1,46 +1,108 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Mi App{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             background-image: url("{{ url_for('static', filename='img/arcade.jpg') }}");
         }
+
         .banner {
-            background-color: #4a69bd;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            font-size: 3em;
-            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            /* separa título a la izq y links a la dcha */
+            align-items: center;
+            padding: 15px 30px;
+            background: black;
             font-family: 'Jersey 10', sans-serif;
+            font-size: 20px;
         }
+
+        .logo {
+            font-weight: bold;
+            font-size: 50px;
+            font-family: 'Jersey 10', sans-serif;
+            background: linear-gradient(90deg, #3959e4, #feb47b);
+            /* Aquí va tu gradiente */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            /* Para compatibilidad */
+            color: transparent;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffde59;
+            /* efecto hover */
+        }
+
         .content {
-            padding: 20px;
+            padding: 10px;
+            color: rgb(0, 0, 0);
         }
+
         a {
             color: white;
             text-decoration: none;
             background-color: #4a69bd;
             padding: 10px;
             border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .container {
+            background-color: aliceblue;
+            padding: 20px;
+            /* más aire interno del contenedor */
+            font-size: 15;
+            display: flex;
+            /* o grid */
+            flex-direction: column;
+            /* para apilar verticalmente */
+            gap: 20px;
+            /* espacio entre hijos */
+            width: fit-content;
+            /* o un ancho fijo como 400px */
+            margin: 0 auto;
+            /* centra horizontalmente */
+        }
+
+        .container h1 {
+            font-size: 20px;
         }
     </style>
 </head>
+
 <body>
-    <div class="banner" href="/">
-        Minijuegos
+    <div class="banner">
+        <div class="logo">Minijuegos</div>
+        <nav class="nav-links">
+            <a href="/">Inicio</a>
+        </nav>
     </div>
 
-    <div class="content1">
+
+    <div class="content">
         {% block content %}{% endblock %}
     </div>
 </body>
+
 </html>

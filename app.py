@@ -127,7 +127,7 @@ def ahorcado():
         session["letras_incorrectas"] = letras_incorrectas
 
     # Mostrar la palabra con guiones bajos
-    mostrar = "".join([l if l in letras_correctas else "_" for l in palabra])
+    mostrar = "".join([l if l in letras_correctas else "_ " for l in palabra])
 
     # Si es una victoria
     if "_" not in mostrar:
