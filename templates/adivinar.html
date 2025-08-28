@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Adivina el número</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    {% extends "base.html" %}
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #8fa1dd, #a3c4f3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        a.back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: #fff;
+            background-color: rgba(0,0,0,0.5);
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        a.back:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .container {
+            background: #ffffffdd;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        p.info {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #4a4a4a;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2em;
+            border: 2px solid #8fa1dd;
+            border-radius: 10px;
+            text-align: center;
+            transition: border 0.3s;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #4a69bd;
+        }
+
+        button {
+            width: 100%;
+            background-color: #4a69bd;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #2c3e50;
+        }
+
+        .mensaje {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+    </style>
+    
+</head>
+<body>
+    <a href="/" class="back">⬅ Volver</a>
+    {% block title %}Adivina el número{% endblock %}
+    {% block content %}
+    <div class="container">
+        <h1>🎲 Juego: Adivina el número</h1>
+        <p class="info">Elige un número entre <b>1 y 10</b></p>
+
+        <form method="POST">
+            <input type="number" name="numero" min="1" max="10" required>
+            <button type="submit">Adivinar</button>
+        </form>
+
+        {% if mensaje %}
+            <div class="mensaje">{{ mensaje }}</div>
+        {% endif %}
+    </div>
+    {% endblock %}
+</body>
+</html>

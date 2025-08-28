@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Adivina el número</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  {% extends "base.html" %}
+
+</head>
+<style>
+  body {
+    background: linear-gradient(135deg, #8fa1dd, #a3c4f3);
+  }
+
+  div a {
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin: 0 10px;
+    background-color: rgb(57, 57, 121);
+  }
+</style>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  {% block title %}Adivina el número{% endblock %}
+  {% block content %}
+<div>
+    <a href="/ahorcado">Ahorcado</a>
+    <a href="/adivinar">Adivinar</a>
+</div>
+ {% endblock %}
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego del Ahorcado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    {% extends "base.html" %}
+
+    <style>
+        /* Reset y tipografía moderna */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #8fa1dd, #a3c4f3);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        a.back {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: #fff;
+            background-color: rgba(0,0,0,0.5);
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        a.back:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .container {
+            background: #ffffffdd;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 25px;
+            color: #1a1a1a;
+        }
+
+        .palabra {
+            font-size: 2.5em;
+            letter-spacing: 10px;
+            margin: 20px 0;
+            color: #4a4a4a;
+        }
+
+        .incorrectas {
+            color: #c0392b;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .mensaje {
+            font-size: 1.2em;
+            font-weight: 700;
+            margin: 15px 0;
+            color: #2c3e50;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        input[type="text"] {
+            width: 60px;
+            padding: 10px;
+            font-size: 1.5em;
+            text-align: center;
+            border: 2px solid #8fa1dd;
+            border-radius: 10px;
+            transition: border 0.3s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #4a69bd;
+        }
+
+        button {
+            background-color: #4a69bd;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #2c3e50;
+        }
+
+        a.reiniciar {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            transition: background 0.3s;
+        }
+        a.reiniciar:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+  {% block title %}Ahorcado{% endblock %}
+    <a href="/" class="back">⬅ Volver</a>
+    {% block content %}
+    <div class="container">
+        <h1>🎮 Juego del Ahorcado</h1>
+
+        <div class="palabra">
+            {{ palabra }}
+        </div>
+
+        <div class="incorrectas">
+            Letras incorrectas: {{ letras_incorrectas | join(", ") }}
+        </div>
+
+        {% if mensaje %}
+            <div class="mensaje">{{ mensaje }}</div>
+            <a href="{{ url_for('reiniciar_ahorcado') }}" class="reiniciar">🔄 Reiniciar juego</a>
+        {% endif %}
+
+        {% if not mensaje %}
+            <form method="POST">
+                <input type="text" name="letra" maxlength="1" required>
+                <button type="submit">Probar</button>
+            </form>
+        {% endif %}
+    </div>
+  {% endblock %}
+</body>
+</html>

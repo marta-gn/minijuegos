@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mi App{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{{ url_for('static', filename='img/arcade.jpg') }}");
+        }
+        .banner {
+            background-color: #4a69bd;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 3em;
+            font-weight: bold;
+            font-family: 'Jersey 10', sans-serif;
+        }
+        .content {
+            padding: 20px;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            background-color: #4a69bd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner" href="/">
+        Minijuegos
+    </div>
+
+    <div class="content1">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

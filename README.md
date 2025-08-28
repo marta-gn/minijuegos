@@ -1,0 +1,1 @@
+Este proyecto se basará en mi primera aproximación en la elaboración de una aplicación usando python. El objetivo es crear un programa corto y rápido en el cual se pueda jugar a adivinar el número, con 3 niveles de dificultad, y de manera independiente se podrá jugar al juego del ahorcado.
