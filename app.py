@@ -157,5 +157,68 @@ def reiniciar_ahorcado():
     session.clear()
     return redirect(url_for("ahorcado"))
 
+preguntas = [
+    {
+        "pregunta": "¿Cuál es el lenguaje que se ejecuta en el navegador?",
+        "opciones": ["Python", "JavaScript", "C++", "Java"],
+        "respuesta": "JavaScript"
+    },
+    {
+        "pregunta": "¿Qué significa HTML?",
+        "opciones": ["Hyper Trainer Marking Language", "Hyper Text Markup Language", "Hyper Text Marketing Language", "High Text Markup Language"],
+        "respuesta": "Hyper Text Markup Language"
+    },
+    {
+        "pregunta": "¿Cuál es la capital de España?",
+        "opciones": ["Barcelona", "Sevilla", "Madrid", "Valencia"],
+        "respuesta": "Madrid"
+    },
+    {
+        "pregunta": "¿Qué símbolo se usa para comentarios en Python?",
+        "opciones": ["//", "#", "<!-- -->", "/* */"],
+        "respuesta": "#"
+    }
+]
+
+@app.route("/trivial", methods=["GET", "POST"])
+def trivial():
+    if "pregunta_actual" not in session:
+        session["pregunta_actual"] = 0
+        session["aciertos"] = 0
+
+    pregunta_actual = session["pregunta_actual"]
+    aciertos = session["aciertos"]
+    mensaje = None
+    fin = False
+
+    if request.method == "POST":
+        respuesta = request.form.get("respuesta")
+        correcta = preguntas[pregunta_actual]["respuesta"]
+
+        if respuesta == correcta:
+            mensaje = "✅ ¡Correcto!"
+            aciertos += 1
+        else:
+            mensaje = f"❌ Incorrecto. La respuesta correcta era: {correcta}"
+
+        # Pasamos a la siguiente pregunta
+        pregunta_actual += 1
+
+        if pregunta_actual >= len(preguntas):
+            mensaje = f"🎉 Fin del juego. Has acertado {aciertos} de {len(preguntas)} preguntas."
+            fin = True
+            session.clear()  # reiniciamos para nueva partida
+        else:
+            session["pregunta_actual"] = pregunta_actual
+            session["aciertos"] = aciertos
+
+    return render_template(
+        "trivial.html",
+        pregunta=preguntas[session.get("pregunta_actual", 0)] if not fin else None,
+        mensaje=mensaje,
+        fin=fin,
+        aciertos=aciertos
+    )
+
 if __name__ == "__main__":
     app.run(debug=True)
